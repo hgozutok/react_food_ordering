@@ -1,5 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { loginUser, userRegister } from "../../services/LoginService";
+import { useDispatch, useSelector } from "react-redux";
+import { token, userInfos } from "../redux/slices/UserSlices";
 
 export const LoginPage = () => {
   const {
@@ -7,9 +10,25 @@ export const LoginPage = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
+  // const { loginUser, userRegister } = LoginService;
+  const dispatch = useDispatch();
+  const existingToken = useSelector((state) => state.token);
 
   const onSubmit = (data, event) => {
     event.preventDefault();
+    console.log(data);
+    loginUser(data).then((response) => {
+      if (response.status === 200) {
+        console.log(response.data.token);
+        dispatch(token(response.data.token));
+        console.log(existingToken);
+        if (token == "") {
+          dispatch(token(response.data.token));
+          dispatch(userInfos(response.data.user));
+        }
+      }
+    });
+
     console.log(data);
   };
   return (
@@ -42,7 +61,7 @@ export const LoginPage = () => {
               type="password"
               {...register("password", {
                 required: true,
-                pattern: /^[A-Za-z]+$/i,
+                // pattern: /^[A-Za-z]+$/i,
               })}
             />
             <span className="text-red-600	">
