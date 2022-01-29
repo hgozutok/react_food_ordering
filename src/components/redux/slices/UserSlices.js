@@ -10,7 +10,7 @@ const userSlice = createSlice({
   },
   reducers: {
     token: (state, payload) => {
-      return (state.token = payload.token);
+      return { ...state, token: payload.payload };
     },
     userInfos: (state) => {
       return state.user;

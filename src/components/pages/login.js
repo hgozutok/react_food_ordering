@@ -20,7 +20,8 @@ export const LoginPage = () => {
     loginUser(data).then((response) => {
       if (response.status === 200) {
         console.log(response.data.token);
-        dispatch(token(response.data.token));
+        console.log(dispatch(token(response.data.token)));
+
         console.log(existingToken);
         if (token == "") {
           dispatch(token(response.data.token));
@@ -29,7 +30,7 @@ export const LoginPage = () => {
       }
     });
 
-    console.log(data);
+    console.log(existingToken);
   };
   return (
     <div

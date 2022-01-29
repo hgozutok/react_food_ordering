@@ -9,10 +9,10 @@ const themeSlice = createSlice({
   },
   reducers: {
     changeDark: (state) => {
-      return { theme: enums.dark };
+      return { ...state, theme: enums.dark };
     },
     changeLight: (state) => {
-      return { theme: enums.light };
+      return { ...state, theme: enums.light };
     },
     themeStatus: (state) => {
       return state.theme;
