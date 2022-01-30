@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { loginUser, userRegister } from "../../services/LoginService";
 import { useDispatch, useSelector } from "react-redux";
 import { token, setUserInfos } from "../redux/slices/UserSlices";
+import { Register } from "./Register";
 
 export const LoginPage = () => {
   const {
@@ -10,15 +11,13 @@ export const LoginPage = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  // const { loginUser, userRegister } = LoginService;
+
   const dispatch = useDispatch();
-  // const etoken = existingToken.token;
-  // console.log("token", etoken);
+
   const existingToken = useSelector((state) => state.user.token);
-  //console.log("existingToken", existingToken);
+
   const userI = useSelector((state) => state.user.user);
   console.log("userI", userI);
-  // const { token } = useSelector(( token ) => console.log("token", token));
 
   const onSubmit = (data, event) => {
     event.preventDefault();
@@ -41,14 +40,15 @@ export const LoginPage = () => {
     >
       <div
         className="flex  flex-col  justify-center content-center
-      items-center  bg-gray-300  rounded-lg  shadow-lg  p-4  m-4
-      al  w-80   h-56  
-       loginShadow
-"
+      items-center   rounded-lg   p-4  m-4
+      al  w-80   h-56 loginShadow
+       text-gray-900 bg-gray-300  dark:bg-gray-900   "
       >
-        <h1>Login</h1>
+        <h1 className="bg-fuchsia-700 text-white w-full text-center text-2xl">
+          Login
+        </h1>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex flex-col">
+          <div className="flex flex-col ">
             <label htmlFor="email">Email</label>
             <input
               type="email"
@@ -71,7 +71,11 @@ export const LoginPage = () => {
               {errors.password?.type === "required" && "Password is required"}
             </span>
           </div>
-          <input type="submit" value="Login" />
+          <input
+            className="bg-fuchsia-800 w-full rounded-lg text-white p-2"
+            type="submit"
+            value="Login"
+          />
         </form>
       </div>
     </div>

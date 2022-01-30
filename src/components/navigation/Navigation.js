@@ -66,11 +66,18 @@ export default function Navigation() {
                           <Link
                             key={item.name}
                             to={item.href}
+                            onClick={() => {
+                              let selected = navigation.filter(
+                                (i) => i.current === true
+                              );
+                              selected[0].current = false;
+                              item.current = true;
+                            }}
                             className={classNames(
                               item.current
                                 ? "bg-gray-900 text-white"
                                 : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                              "px-3 py-2 rounded-md text-sm font-medium"
+                              " px-3 py-2 rounded-md text-sm font-medium"
                             )}
                             aria-current={item.current ? "page" : undefined}
                           >

@@ -6,7 +6,7 @@ export async function loginUser(user) {
   return await axios.post(ApiUrl.userLogin, user);
 }
 
-async function RegisterUser(user) {
+export async function registerUser(user) {
   return await axios.post(ApiUrl.userRegister, user);
 }
 
@@ -18,4 +18,4 @@ async function GetAllUsers() {
   return await axios.get("http://localhost:8080/api/users");
 }
 
-export default { loginUser, RegisterUser, GetUser, GetAllUsers };
+export default { loginUser, registerUser, GetUser, GetAllUsers };

@@ -2,7 +2,8 @@ import React from "react";
 import { Routes, Route, Outlet, Link } from "react-router-dom";
 import Layout from "../layout/Layout";
 import { HomePage } from "../pages/Home";
-import { LoginPage } from "../pages/login";
+
+import { LoginOrRegister } from "../pages/LoginorRegister";
 
 function RouteTable() {
   return (
@@ -43,7 +44,7 @@ function RouteTable() {
         element={
           <Layout>
             {" "}
-            <LoginPage />{" "}
+            <LoginOrRegister />{" "}
           </Layout>
         }
       ></Route>
