@@ -9,9 +9,15 @@ import themeSlice, {
   changeLight,
   themeStatus,
 } from "./slices/ThemeSlices";
+import userSlice, {
+  token,
+  userInfos,
+  setUserInfos,
+  existingToken,
+} from "./slices/UserSlices";
+
 import counterSlice from "./slices/CounterSlices";
 import thunkMiddleware from "redux-thunk";
-import userSlice from "./slices/UserSlices";
 
 const rootReducer = combineReducers({
   theme: themeSlice.reducer,
@@ -22,7 +28,11 @@ const rootReducer = combineReducers({
 const middlewareEnhancer = applyMiddleware(
   changeDark(),
   changeLight(),
-  themeStatus()
+  themeStatus(),
+  token(),
+  existingToken(),
+  userInfos(),
+  setUserInfos()
 );
 
 //const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));

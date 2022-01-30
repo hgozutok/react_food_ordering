@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { loginUser, userRegister } from "../../services/LoginService";
 import { useDispatch, useSelector } from "react-redux";
-import { token, userInfos } from "../redux/slices/UserSlices";
+import { token, setUserInfos } from "../redux/slices/UserSlices";
 
 export const LoginPage = () => {
   const {
@@ -12,26 +12,28 @@ export const LoginPage = () => {
   } = useForm();
   // const { loginUser, userRegister } = LoginService;
   const dispatch = useDispatch();
-  const existingToken = useSelector((state) => state.token);
+  // const etoken = existingToken.token;
+  // console.log("token", etoken);
+  const existingToken = useSelector((state) => state.user.token);
+  //console.log("existingToken", existingToken);
+  const userI = useSelector((state) => state.user.user);
+  console.log("userI", userI);
+  // const { token } = useSelector(( token ) => console.log("token", token));
 
   const onSubmit = (data, event) => {
     event.preventDefault();
     console.log(data);
     loginUser(data).then((response) => {
       if (response.status === 200) {
-        console.log(response.data.token);
-        console.log(dispatch(token(response.data.token)));
-
-        console.log(existingToken);
-        if (token == "") {
-          dispatch(token(response.data.token));
-          dispatch(userInfos(response.data.user));
-        }
+        //  console.log(response.data);
+        dispatch(token(response.data.token));
+        dispatch(setUserInfos(response.data));
+        localStorage.setItem("token", response.data.token);
+        // console.log(existingToken);
       }
     });
-
-    console.log(existingToken);
   };
+
   return (
     <div
       className="flex  flex-col  justify-center items-center content-center 
