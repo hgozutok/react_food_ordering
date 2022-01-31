@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 export const SingleSlider = () => {
   const featuredImages = [
@@ -30,7 +30,7 @@ export const SingleSlider = () => {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     startSlider();
   }, []);
 

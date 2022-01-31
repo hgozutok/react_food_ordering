@@ -50,7 +50,7 @@ export default function Navigation() {
         <body class="h-full">
         ```
       */}
-      <div>
+      <div className="min-w-[450px]">
         <Disclosure as="nav" className="bg-gray-800">
           {({ open }) => (
             <>
