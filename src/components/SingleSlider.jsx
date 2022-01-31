@@ -50,6 +50,7 @@ export const SingleSlider = () => {
             width={Screen.width}
             height="500px"
             src={featuredImages[currentIndex]}
+            alt="slider"
           />
         </div>
 
