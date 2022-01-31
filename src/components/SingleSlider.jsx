@@ -28,34 +28,16 @@ export const SingleSlider = () => {
       setCurrentIndex(count);
     }
   };
-  useEffect(() => {
-    const handleOnNextClick = () => {
-      count = (count + 1) % featuredImages.length;
-      if (count === featuredImages.length) {
-        setCurrentIndex(0);
-        count = 0;
-      } else {
-        setCurrentIndex(count);
-      }
-    };
 
-    const handleOnPrevClick = () => {
-      const productsLength = featuredImages.length;
-      count = (currentIndex + productsLength - 1) % productsLength;
-      if (count === featuredImages.length) {
-        setCurrentIndex(0);
-        count = 0;
-      } else {
-        setCurrentIndex(count);
-      }
-    };
-    const startSlider = () => {
-      setInterval(() => {
-        handleOnNextClick();
-      }, 3000);
-    };
-    startSlider();
-  }, []);
+  // useEffect(() => {
+
+  //   const startSlider = () => {
+  //     setInterval(() => {
+  //       handleOnNextClick();
+  //     }, 3000);
+  //   };
+  //   startSlider();
+  // }, []);
 
   return (
     <div className="max-w-screen-xl m-auto">
