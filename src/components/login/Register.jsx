@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { registerUser } from "../../services/LoginService";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { token, setUserInfos } from "../redux/slices/UserSlices";
 
 export const Register = () => {

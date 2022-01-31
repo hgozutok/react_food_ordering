@@ -1,9 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { loginUser, userRegister } from "../../services/LoginService";
+import { loginUser } from "../../services/LoginService";
 import { useDispatch, useSelector } from "react-redux";
 import { token, setUserInfos } from "../redux/slices/UserSlices";
-import { Register } from "./Register";
 
 export const LoginPage = () => {
   const {
@@ -13,8 +12,6 @@ export const LoginPage = () => {
   } = useForm();
 
   const dispatch = useDispatch();
-
-  const existingToken = useSelector((state) => state.user.token);
 
   const userI = useSelector((state) => state.user.user);
   console.log("userI", userI);

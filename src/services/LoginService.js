@@ -10,11 +10,11 @@ export async function registerUser(user) {
   return await axios.post(ApiUrl.userRegister, user);
 }
 
-async function GetUser(user) {
+export async function GetUser(user) {
   return await axios.get("http://localhost:8080/api/user/" + user);
 }
 
-async function GetAllUsers() {
+export async function GetAllUsers() {
   return await axios.get("http://localhost:8080/api/users");
 }
 

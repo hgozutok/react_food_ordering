@@ -2,7 +2,6 @@ import {
   applyMiddleware,
   combineReducers,
   configureStore,
-  createStore,
 } from "@reduxjs/toolkit";
 import themeSlice, {
   changeDark,
@@ -34,8 +33,6 @@ const middlewareEnhancer = applyMiddleware(
   userInfos(),
   setUserInfos()
 );
-
-//const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
 const store = configureStore(
   {
