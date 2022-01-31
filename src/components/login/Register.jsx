@@ -13,8 +13,6 @@ export const Register = () => {
 
   const dispatch = useDispatch();
 
-  const existingToken = useSelector((state) => state.user.token);
-
   const onSubmit = (data, event) => {
     event.preventDefault();
     console.log(data);
