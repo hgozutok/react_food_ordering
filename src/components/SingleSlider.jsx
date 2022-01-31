@@ -30,15 +30,15 @@ export const SingleSlider = () => {
     }
   };
 
-  useEffect(() => {
-    startSlider();
-  }, []);
-
   const startSlider = () => {
     setInterval(() => {
       handleOnNextClick();
     }, 3000);
   };
+
+  useEffect(() => {
+    startSlider();
+  }, []);
 
   return (
     <div className="max-w-screen-xl m-auto">
