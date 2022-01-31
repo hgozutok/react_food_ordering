@@ -9,28 +9,27 @@ export const SingleSlider = () => {
   const [currentIndex, setCurrentIndex] = React.useState(0);
   let count = 0;
 
-  const handleOnNextClick = () => {
-    count = (count + 1) % featuredImages.length;
-    if (count === featuredImages.length) {
-      setCurrentIndex(0);
-      count = 0;
-    } else {
-      setCurrentIndex(count);
-    }
-  };
-
-  const handleOnPrevClick = () => {
-    const productsLength = featuredImages.length;
-    count = (currentIndex + productsLength - 1) % productsLength;
-    if (count === featuredImages.length) {
-      setCurrentIndex(0);
-      count = 0;
-    } else {
-      setCurrentIndex(count);
-    }
-  };
-
   useEffect(() => {
+    const handleOnNextClick = () => {
+      count = (count + 1) % featuredImages.length;
+      if (count === featuredImages.length) {
+        setCurrentIndex(0);
+        count = 0;
+      } else {
+        setCurrentIndex(count);
+      }
+    };
+
+    const handleOnPrevClick = () => {
+      const productsLength = featuredImages.length;
+      count = (currentIndex + productsLength - 1) % productsLength;
+      if (count === featuredImages.length) {
+        setCurrentIndex(0);
+        count = 0;
+      } else {
+        setCurrentIndex(count);
+      }
+    };
     const startSlider = () => {
       setInterval(() => {
         handleOnNextClick();
