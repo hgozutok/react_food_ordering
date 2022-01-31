@@ -30,13 +30,12 @@ export const SingleSlider = () => {
     }
   };
 
-  const startSlider = () => {
-    setInterval(() => {
-      handleOnNextClick();
-    }, 3000);
-  };
-
   useEffect(() => {
+    const startSlider = () => {
+      setInterval(() => {
+        handleOnNextClick();
+      }, 3000);
+    };
     startSlider();
   }, []);
 
