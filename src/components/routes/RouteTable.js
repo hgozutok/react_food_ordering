@@ -4,6 +4,7 @@ import Layout from "../layout/Layout";
 import { HomePage } from "../pages/Home";
 
 import { LoginOrRegister } from "../pages/LoginorRegister";
+import { Menus } from "../pages/Menus";
 
 function RouteTable() {
   return (
@@ -45,6 +46,15 @@ function RouteTable() {
           <Layout>
             {" "}
             <LoginOrRegister />{" "}
+          </Layout>
+        }
+      ></Route>
+      <Route
+        path="/menus"
+        element={
+          <Layout>
+            {" "}
+            <Menus />{" "}
           </Layout>
         }
       ></Route>

@@ -13,7 +13,7 @@ const user = {
 };
 const navigation = [
   { name: "Dashboard", href: "/", current: true },
-  { name: "Team", href: "#", current: false },
+  { name: "Menus", href: "/menus", current: false },
   { name: "Projects", href: "#", current: false },
   { name: "Calendar", href: "#", current: false },
   { name: "Login", href: "/login", current: false },
@@ -54,7 +54,7 @@ export default function Navigation() {
         <Disclosure as="nav" className="bg-gray-800">
           {({ open }) => (
             <>
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">

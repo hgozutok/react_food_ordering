@@ -5,7 +5,7 @@ export const LoginOrRegister = () => {
   return (
     <div
       className="grid grid-flow-row justify-center items-center
-    h-[calc(100%-4rem)] w-full "
+    h-screen w-full "
     >
       <h1 className="text-lg">Login</h1>
       <div className=" overflow-hidden grid grid-flow-row grid-cols-1 grid-rows-2 md:grid-cols-2">

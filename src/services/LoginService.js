@@ -11,7 +11,7 @@ async function registerUser(user) {
 }
 
 async function GetUser(user) {
-  return await axios.get("http://localhost:8080/api/user/" + user);
+  return await axios.get(ApiUrl.userLogin + user);
 }
 
 async function GetAllUsers() {

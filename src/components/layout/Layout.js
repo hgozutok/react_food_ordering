@@ -8,8 +8,8 @@ function Layout({ children }) {
     <div
       className={
         theme.theme === "dark"
-          ? "bg-slate-800 h-screen w-screen text-white"
-          : "bg-neutral-100 h-screen w-screen"
+          ? "bg-slate-800 h-full w-full text-white"
+          : "bg-neutral-100 h-full w-full"
       }
     >
       <Navigation />
