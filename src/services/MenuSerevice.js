@@ -8,7 +8,9 @@ class MenuService {
   static async setMenu(menu) {
     return await axios.post(ApiUrl.menus, menu);
     }
-
+    static async getMenu(id) {
+      return await axios.get(ApiUrl.menus+ "/"+id);
+      }
     static async setMenuType(menuType) {
         return await axios.post(ApiUrl.menuTypes, menuType);
 

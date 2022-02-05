@@ -5,6 +5,7 @@ import { HomePage } from "../pages/Home";
 
 import { LoginOrRegister } from "../pages/LoginorRegister";
 import { Menus } from "../pages/Menus";
+import {MenuDetail} from '../pages/MenuDetail'
 
 function RouteTable() {
   return (
@@ -37,8 +38,8 @@ function RouteTable() {
         }
       ></Route> */}
       <Route
-        path="/products/product/:id/"
-        element={<Layout> {/* <Product />{" "} */}</Layout>}
+        path="/menus/menudetail/:id/"
+        element={<Layout>  <MenuDetail /> </Layout>}
       ></Route>
       <Route
         path="/login"
