@@ -4,7 +4,7 @@ import MenuService from "../../services/MenuSerevice";
 
 export const MenuDetail = () => {
   const { id } = useParams();
-
+   
   const [menu, setMenu] = React.useState();
 
   //const [menuId, setMenuId] = React.useState("");
