@@ -8,10 +8,11 @@ export const MenuDetail = () => {
   const [menu, setMenu] = React.useState();
 
   //const [menuId, setMenuId] = React.useState("");
-
+//testtts
   React.useEffect(() => {
     MenuService.getMenu(id).then((response) => {
       setMenu(response.data);
+      
     });
   }, []);
 
