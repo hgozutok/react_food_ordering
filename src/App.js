@@ -4,6 +4,7 @@ import React from "react";
 import RouteTable from "./components/routes/RouteTable";
 
 function App() {
+  console.log(process.env);
   React.useEffect(() => {}, []);
 
   return (
