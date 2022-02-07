@@ -6,9 +6,6 @@ import MenuService from "../../services/MenuSerevice";
 export const Menus = () => {
   const [menus, setMenus] = React.useState([]);
   const [menuTypes, setMenuTypes] = React.useState([]);
-  const [menuType, setMenuType] = React.useState("");
-  const [menu, setMenu] = React.useState("");
-  const [menuId, setMenuId] = React.useState("");
 
   React.useEffect(() => {
     MenuService.getMenus().then((response) => {
@@ -20,7 +17,7 @@ export const Menus = () => {
   }, []);
 
   return (
-    <div  className="w-full h-full">
+    <div className="w-full h-full">
       <div>
         <div className="flex space-x-4" style={{ margin: "2px" }}>
           {menuTypes.map((menuType) => {
@@ -50,10 +47,8 @@ export const Menus = () => {
       p-8 max-w-xs  loginShadow  m-4 rounded-lg"
                   >
                     <div className="">
-                       <h2 className="text-xxl font-bold ">
-                        {menu.menuName} </h2>  
-                         
-                    
+                      <h2 className="text-xxl font-bold ">{menu.menuName} </h2>
+
                       {/* <p className="text-xl text-gray-800 dark:text-white mt-2"></p> */}
                     </div>
                     <div
@@ -85,25 +80,29 @@ export const Menus = () => {
                             </svg>
                           </Link>
                         </button>
-                        
-                        
                       </div>
                       <div
                         className="absolute bottom-0  "
                         style={{ color: "red" }}
                       >
-                       
                         <button className=" ">
                           <Link to={`/menus/menudetail/${menu.menuId}`}>
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-  <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-  <path fillRule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clipRule="evenodd" />
-</svg>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-5 w-5"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                            >
+                              <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                              <path
+                                fillRule="evenodd"
+                                d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
                           </Link>
                         </button>
-                        
                       </div>
-
 
                       <div
                         className="absolute w-full"
@@ -121,10 +120,7 @@ export const Menus = () => {
               );
             })}
           </div>
-          <div className="flex h-screen">
-
-          </div>
-
+          <div className="flex h-screen"></div>
         </div>
       </div>
     </div>
