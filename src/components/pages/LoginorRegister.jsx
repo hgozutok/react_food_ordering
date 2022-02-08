@@ -3,18 +3,21 @@ import { Register } from "../login/Register";
 import { LoginPage } from "../login/login";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { logOut } from "../redux/slices/UserSlices";
 
 export const LoginOrRegister = () => {
   // const dispatch = useDispatch();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const userI = useSelector((state) => state.user.user);
+  const user = useSelector((state) => state.user.user);
 
   React.useEffect(() => {
-    if (userI) {
+    if (user.token === null) {
+      dispatch(logOut());
       navigate("/");
     }
-  }, [navigate, userI]);
+  }, [dispatch, navigate, user.token]);
 
   return (
     <div

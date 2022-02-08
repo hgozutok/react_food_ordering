@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { loginUser } from "../../services/LoginService";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { token, setUserInfos } from "../redux/slices/UserSlices";
 import { useNavigate } from "react-router-dom";
 
