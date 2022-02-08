@@ -1,4 +1,4 @@
-export const baseUrl = "http://h.gozutok.info/food/";
+export const baseUrl = "https://h.gozutok.info/food/";
 export const userToken = baseUrl + "api/user/token";
 export const userRegister = baseUrl + "api/user/register";
 export const userLogin = baseUrl + "api/user/token";
