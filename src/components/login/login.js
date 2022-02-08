@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { loginUser } from "../../services/LoginService";
 import { useDispatch, useSelector } from "react-redux";
 import { token, setUserInfos } from "../redux/slices/UserSlices";
+import { useNavigate } from "react-router-dom";
 
 export const LoginPage = () => {
   const {
@@ -12,19 +13,19 @@ export const LoginPage = () => {
   } = useForm();
 
   const dispatch = useDispatch();
-
-  const userI = useSelector((state) => state.user.user);
-  console.log("userI", userI);
+  const navigate = useNavigate();
 
   const onSubmit = (data, event) => {
     event.preventDefault();
     console.log(data);
+
     loginUser(data).then((response) => {
       if (response.status === 200) {
         //  console.log(response.data);
         dispatch(token(response.data.token));
         dispatch(setUserInfos(response.data));
         localStorage.setItem("token", response.data.token);
+        navigate("/");
         // console.log(existingToken);
       }
     });

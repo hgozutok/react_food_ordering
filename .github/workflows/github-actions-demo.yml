@@ -15,7 +15,7 @@ jobs:
     env:
       Greeting: Hello
       super_secret: ${{ secrets.SuperSecret }}
-      jwt: ${{ secrets.c }}
+      jwt: ${{ secrets.JWT_KEY }}
     strategy:
       matrix:
         node-version: [16.x]

@@ -1,7 +1,21 @@
 import React from "react";
 import { Register } from "../login/Register";
 import { LoginPage } from "../login/login";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 export const LoginOrRegister = () => {
+  // const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const userI = useSelector((state) => state.user.user);
+
+  React.useEffect(() => {
+    if (userI) {
+      navigate("/");
+    }
+  }, [navigate, userI]);
+
   return (
     <div
       className="grid grid-flow-row justify-center items-center

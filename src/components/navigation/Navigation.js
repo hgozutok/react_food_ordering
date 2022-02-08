@@ -1,16 +1,11 @@
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import { useDispatch, useSelector } from "react-redux";
 import { changeDark, changeLight } from "../redux/slices/ThemeSlices";
-import { Link } from "react-router-dom";
+import { logOut } from "../redux/slices/UserSlices";
+import { Link, useNavigate } from "react-router-dom";
 
-const user = {
-  name: "Hugo",
-  email: "hugo@gozutok.info",
-  imageUrl:
-    "https://yt3.ggpht.com/ytc/AKedOLR45S-PndNa_Ou91IfHFE0jNe-255VVSy5upZ330g=s900-c-k-c0x00ffffff-no-rj",
-};
 const navigation = [
   { name: "Dashboard", href: "/", current: true },
   { name: "Menus", href: "/menus", current: false },
@@ -29,8 +24,10 @@ function classNames(...classes) {
 }
 
 export default function Navigation() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.theme);
+  const user = useSelector((state) => state.user.user);
 
   const themeChange = () => {
     if (theme.theme === "bg-white") {
@@ -39,6 +36,16 @@ export default function Navigation() {
       dispatch(changeLight());
     }
   };
+  const userLogout = () => {
+    dispatch(logOut());
+    navigate("/");
+  };
+
+  React.useEffect(() => {
+    if (user.token === null) {
+      dispatch(logOut());
+    }
+  }, [dispatch, user.token]);
 
   return (
     <>
@@ -135,50 +142,120 @@ export default function Navigation() {
                         <BellIcon className="h-6 w-6" aria-hidden="true" />
                       </button>
                       {/* Profile dropdown */}
-                      <Menu as="div" className="ml-3 relative">
-                        <div>
-                          <Menu.Button className="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                            <span className="sr-only">Open user menu</span>
-                            <img
-                              className="h-8 w-8 rounded-full"
-                              src={user.imageUrl}
-                              alt=""
-                            />
-                          </Menu.Button>
-                        </div>
-                        <Transition
-                          as={Fragment}
-                          enter="transition ease-out duration-100"
-                          enterFrom="transform opacity-0 scale-95"
-                          enterTo="transform opacity-100 scale-100"
-                          leave="transition ease-in duration-75"
-                          leaveFrom="transform opacity-100 scale-100"
-                          leaveTo="transform opacity-0 scale-95"
-                        >
-                          <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                            {userNavigation.map((item) => (
-                              <Menu.Item key={item.name}>
+                      {user.token ? (
+                        <Menu as="div" className="ml-3 relative">
+                          <div>
+                            <Menu.Button className="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                              <span className="sr-only">Open user menu</span>
+                              {user.image !== "" ? (
+                                <img
+                                  className="h-8 w-8 rounded-full"
+                                  src={user.image}
+                                  alt=""
+                                />
+                              ) : (
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  className="h-6 w-6"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                                  />
+                                </svg>
+                              )}
+                            </Menu.Button>
+                          </div>
+                          <Transition
+                            as={Fragment}
+                            enter="transition ease-out duration-100"
+                            enterFrom="transform opacity-0 scale-95"
+                            enterTo="transform opacity-100 scale-100"
+                            leave="transition ease-in duration-75"
+                            leaveFrom="transform opacity-100 scale-100"
+                            leaveTo="transform opacity-0 scale-95"
+                          >
+                            <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                              <Menu.Item>
                                 {({ active }) => (
                                   <Link
-                                    to={item.href}
+                                    to={"#"}
                                     className={classNames(
                                       active ? "bg-gray-100" : "",
                                       "block px-4 py-2 text-sm text-gray-700"
                                     )}
                                   >
-                                    {item.name}
+                                    Your Profile
                                   </Link>
                                 )}
                               </Menu.Item>
-                            ))}
-                          </Menu.Items>
-                        </Transition>
-                      </Menu>
+                              <Menu.Item>
+                                {({ active }) => (
+                                  <Link
+                                    to={"#"}
+                                    className={classNames(
+                                      active ? "bg-gray-100" : "",
+                                      "block px-4 py-2 text-sm text-gray-700"
+                                    )}
+                                  >
+                                    Settings
+                                  </Link>
+                                )}
+                              </Menu.Item>
+                              <Menu.Item>
+                                {({ active }) => (
+                                  <Link
+                                    to={"/logout"}
+                                    onClick={userLogout}
+                                    className={classNames(
+                                      active ? "bg-gray-100" : "",
+                                      "block px-4 py-2 text-sm text-gray-700"
+                                    )}
+                                  >
+                                    Sign Out
+                                  </Link>
+                                )}
+                              </Menu.Item>
+
+                              {/* {userNavigation.map((item) => (
+                                <Menu.Item key={item.name}>
+                                  {({ active }) => (
+                                    <Link
+                                      to={item.href}
+                                      className={classNames(
+                                        active ? "bg-gray-100" : "",
+                                        "block px-4 py-2 text-sm text-gray-700"
+                                      )}
+                                    >
+                                      {item.name}
+                                    </Link>
+                                  )}
+                                </Menu.Item>
+                              ))} */}
+                            </Menu.Items>
+                          </Transition>
+                        </Menu>
+                      ) : (
+                        <button
+                          onClick={() => navigate("/login")}
+                          // as="a"
+                          // href={"/login"}
+                          className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700"
+                        >
+                          Login
+                        </button>
+                      )}
                     </div>
                   </div>
 
                   <div className="-mr-2 flex md:hidden">
                     {/* Mobile menu button */}
+
                     <Disclosure.Button className="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                       <span className="sr-only">Open main menu</span>
                       {open ? (
@@ -202,7 +279,7 @@ export default function Navigation() {
                       as="a"
                       href={item.href}
                       className={classNames(
-                        item.current
+                        item.currents
                           ? "bg-gray-900 text-white"
                           : "text-gray-300 hover:bg-gray-700 hover:text-white",
                         "block px-3 py-2 rounded-md text-base font-medium"
@@ -213,18 +290,36 @@ export default function Navigation() {
                     </Disclosure.Button>
                   ))}
                 </div>
+
                 <div className="pt-4 pb-3 border-t border-gray-700">
                   <div className="flex items-center px-5">
                     <div className="flex-shrink-0">
-                      <img
-                        className="h-10 w-10 rounded-full"
-                        src={user.imageUrl}
-                        alt=""
-                      />
+                      {user.image !== "" ? (
+                        <img
+                          className="h-10 w-10 rounded-full"
+                          src={user.image}
+                          alt=""
+                        />
+                      ) : (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-6 w-6"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                        </svg>
+                      )}
                     </div>
                     <div className="ml-3">
                       <div className="text-base font-medium leading-none text-white">
-                        {user.name}
+                        {user.userName}
                       </div>
                       <div className="text-sm font-medium leading-none text-gray-400">
                         {user.email}
