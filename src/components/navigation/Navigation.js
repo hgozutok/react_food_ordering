@@ -14,9 +14,9 @@ const navigation = [
   { name: "Login", href: "/login", current: false },
 ];
 const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
+  { name: "Your Profile", href: "#", active: true },
+  { name: "Settings", href: "#", active: true },
+  { name: "Sign out", href: "#", active: true },
 ];
 
 function classNames(...classes) {
@@ -36,27 +36,19 @@ export default function Navigation() {
       dispatch(changeLight());
     }
   };
-  const userLogout = () => {
-    dispatch(logOut());
-    navigate("/");
-  };
+  // const userLogout = () => {
+  //   dispatch(logOut());
+  //   navigate("/");
+  // };
 
   React.useEffect(() => {
     if (user.token === null) {
       dispatch(logOut());
     }
-  }, [dispatch, user.token]);
+  }, [dispatch, user.token, navigate]);
 
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-gray-100">
-        <body class="h-full">
-        ```
-      */}
       <div className="min-w-[450px]">
         <Disclosure as="nav" className="bg-gray-800">
           {({ open }) => (
@@ -211,7 +203,7 @@ export default function Navigation() {
                                 {({ active }) => (
                                   <Link
                                     to={"/logout"}
-                                    onClick={userLogout}
+                                    // onClick={userLogout}
                                     className={classNames(
                                       active ? "bg-gray-100" : "",
                                       "block px-4 py-2 text-sm text-gray-700"
