@@ -4,6 +4,8 @@ import { loginUser } from "../../services/LoginService";
 import { useDispatch } from "react-redux";
 import { token, setUserInfos } from "../redux/slices/UserSlices";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const LoginPage = () => {
   const {
@@ -19,16 +21,21 @@ export const LoginPage = () => {
     event.preventDefault();
     console.log(data);
 
-    loginUser(data).then((response) => {
-      if (response.status === 200) {
-        //  console.log(response.data);
-        dispatch(token(response.data.token));
-        dispatch(setUserInfos(response.data));
-        localStorage.setItem("token", response.data.token);
-        navigate("/");
-        // console.log(existingToken);
-      }
-    });
+    loginUser(data)
+      .then((response) => {
+        if (response.status === 200) {
+          //  console.log(response.data);
+          dispatch(token(response.data.token));
+          dispatch(setUserInfos(response.data));
+          localStorage.setItem("token", response.data.token);
+          toast.success("Login Successful");
+          navigate("/");
+          // console.log(existingToken);
+        }
+      })
+      .catch((error) => {
+        toast.error("Login Failed");
+      });
   };
 
   return (
