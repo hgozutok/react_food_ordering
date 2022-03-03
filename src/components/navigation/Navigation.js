@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeDark, changeLight } from "../redux/slices/ThemeSlices";
 import { logOut } from "../redux/slices/UserSlices";
 import { Link, useNavigate } from "react-router-dom";
+import { LoginModal } from "../login/LoginModal";
 
 const navigation = [
   { name: "Dashboard", href: "/", current: true },
@@ -28,6 +29,7 @@ export default function Navigation() {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.theme);
   const user = useSelector((state) => state.user.user);
+  const [openModal, setOpenModal] = React.useState(false);
 
   const themeChange = () => {
     if (theme.theme === "bg-white") {
@@ -89,16 +91,13 @@ export default function Navigation() {
 
                   <div className="hidden md:block">
                     <div className="ml-4 flex flex-row items-center md:ml-6 ">
-                      <button
+                      {/* <button
                         onClick={themeChange}
                         id="theme-toggle"
                         type="button"
                         className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
 
-                        //             "text-gray-500
-                        // dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700
-                        // focus:outline-none focus:ring-4 focus:ring-gray-200
-                        // dark:focus:ring-gray-700 rounded-full text-sm p-2.5"
+                 
                       >
                         {theme.theme === "dark" ? (
                           <svg
@@ -123,7 +122,7 @@ export default function Navigation() {
                             <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
                           </svg>
                         )}
-                      </button>{" "}
+                      </button> */}
                       <div />
                       <div className="ml-4 flex flex-row items-center md:ml-6 "></div>
                       <button
@@ -233,14 +232,25 @@ export default function Navigation() {
                           </Transition>
                         </Menu>
                       ) : (
-                        <button
-                          onClick={() => navigate("/login")}
-                          // as="a"
-                          // href={"/login"}
-                          className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700"
-                        >
-                          Login
-                        </button>
+                        <div>
+                          <button
+                            onClick={() => navigate("/login")}
+                            // as="a"
+                            // href={"/login"}
+                            className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700"
+                          >
+                            Login
+                          </button>
+                          <button
+                            onClick={() => setOpenModal(true)}
+                            // as="a"
+                            // href={"/login"}
+                            className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700"
+                          >
+                            Login
+                          </button>
+                          <LoginModal />{" "}
+                        </div>
                       )}
                     </div>
                   </div>

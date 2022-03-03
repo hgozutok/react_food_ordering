@@ -20,6 +20,15 @@ export const LoginPage = () => {
   const onSubmit = (data, event) => {
     event.preventDefault();
     console.log(data);
+    // toast.info("Logging in...", {
+    //   position: "top-right",
+    //   autoClose: 3000,
+    //   hideProgressBar: false,
+    //   closeOnClick: true,
+    //   pauseOnHover: true,
+    //   draggable: true,
+    //   progress: undefined,
+    // });
 
     loginUser(data)
       .then((response) => {
@@ -43,6 +52,7 @@ export const LoginPage = () => {
       className="flex  flex-col  justify-center items-center content-center 
     h-[calc(100%-4rem)] w-full "
     >
+      {" "}
       <div
         className="flex  flex-col  justify-center content-center
       items-center   rounded-lg   p-4  m-4
@@ -83,6 +93,7 @@ export const LoginPage = () => {
           />
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 };

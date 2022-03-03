@@ -2,6 +2,7 @@ import "./App.css";
 import React from "react";
 
 import RouteTable from "./components/routes/RouteTable";
+import "flowbite";
 
 function App() {
   console.log(process.env);
