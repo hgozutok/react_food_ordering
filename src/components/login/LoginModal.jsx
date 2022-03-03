@@ -1,7 +1,5 @@
 import { Fragment, useRef, useState } from "react";
-import { Dialog, Transition } from "@headlessui/react";
-import { ExclamationIcon } from "@heroicons/react/outline";
-import { LoginPage } from "./login";
+
 export const LoginModal = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -34,6 +32,7 @@ export const LoginModal = (props) => {
                 </svg>
               </button>
             </div>
+
             <form
               className="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8"
               action="#"

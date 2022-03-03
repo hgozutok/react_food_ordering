@@ -38,7 +38,7 @@ export const LoginPage = () => {
           dispatch(setUserInfos(response.data));
           localStorage.setItem("token", response.data.token);
           toast.success("Login Successful");
-          navigate("/");
+          navigate("/", { replace: true });
           // console.log(existingToken);
         }
       })

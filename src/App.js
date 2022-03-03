@@ -3,6 +3,8 @@ import React from "react";
 
 import RouteTable from "./components/routes/RouteTable";
 import "flowbite";
+import { ToastContainer } from "react-toastify";
+import { LoginModal } from "./components/login/LoginModal";
 
 function App() {
   console.log(process.env);
@@ -12,6 +14,8 @@ function App() {
   return (
     <React.Fragment>
       <RouteTable />
+      <ToastContainer />
+      <LoginModal />
     </React.Fragment>
   );
 }

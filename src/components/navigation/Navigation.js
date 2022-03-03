@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeDark, changeLight } from "../redux/slices/ThemeSlices";
 import { logOut } from "../redux/slices/UserSlices";
 import { Link, useNavigate } from "react-router-dom";
-import { LoginModal } from "../login/LoginModal";
 
 const navigation = [
   { name: "Dashboard", href: "/", current: true },
@@ -234,22 +233,21 @@ export default function Navigation() {
                       ) : (
                         <div>
                           <button
-                            onClick={() => navigate("/login")}
+                            type="button"
+                            data-modal-toggle={
+                              openModal ? "authentication-modal" : ""
+                            }
+                            onClick={
+                              () => setOpenModal(!openModal)
+                              // toggleModal("authentication-modal", true)
+                            }
+                            //onClick={() => navigate("/login")}
                             // as="a"
                             // href={"/login"}
                             className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700"
                           >
                             Login
                           </button>
-                          <button
-                            onClick={() => setOpenModal(true)}
-                            // as="a"
-                            // href={"/login"}
-                            className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700"
-                          >
-                            Login
-                          </button>
-                          <LoginModal />{" "}
                         </div>
                       )}
                     </div>
