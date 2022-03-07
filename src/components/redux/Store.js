@@ -14,6 +14,13 @@ import userSlice, {
   setUserInfos,
   existingToken,
 } from "./slices/UserSlices";
+import cartSlice, {
+  addItem,
+  removeItem,
+  clearCart,
+  cartTotal,
+  updateCart,
+} from "./slices/cartSlices";
 
 import counterSlice from "./slices/CounterSlices";
 import thunkMiddleware from "redux-thunk";
@@ -22,6 +29,7 @@ const rootReducer = combineReducers({
   theme: themeSlice.reducer,
   counter: counterSlice.reducer,
   user: userSlice.reducer,
+  cart: cartSlice.reducer,
 });
 
 const middlewareEnhancer = applyMiddleware(
@@ -31,7 +39,13 @@ const middlewareEnhancer = applyMiddleware(
   token(),
   existingToken(),
   userInfos(),
-  setUserInfos()
+  setUserInfos(),
+  addItem(),
+  removeItem(),
+  clearCart(),
+  cartTotal(),
+  updateCart(),
+  thunkMiddleware
 );
 
 const store = configureStore(
