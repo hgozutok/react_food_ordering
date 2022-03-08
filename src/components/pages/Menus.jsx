@@ -1,11 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import MenuService from "../../services/MenuSerevice";
+import { useSelector, useDispatch } from "react-redux";
+import { addItem } from "../redux/slices/cartSlices";
 //cart icon
+import { Toast } from "primereact/toast";
 
 export const Menus = () => {
+  const dispatch = useDispatch();
+  const toast = React.useRef(null);
+
+  const cart = useSelector((state) => state.cart);
+
   const [menus, setMenus] = React.useState([]);
   const [menuTypes, setMenuTypes] = React.useState([]);
+
+  const addItemToCart = (item) => {
+    dispatch(addItem(item));
+    toast.current.show({
+      severity: "success",
+      summary: "Item added to cart",
+      detail: "Your item has been added to cart",
+    });
+  };
 
   React.useEffect(() => {
     MenuService.getMenus().then((response) => {
@@ -62,23 +79,22 @@ export const Menus = () => {
                         className="absolute top-1 right-0"
                         style={{ color: "red" }}
                       >
-                        <button className=" ">
-                          <Link to={`/menu/${menu.menuId}`}>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="h-6 w-6 text-blue-700 dark:text-blue-700 hover:h-8 hover:w-8"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                              />
-                            </svg>
-                          </Link>
+                        <button onClick={() => addItemToCart(menu)}>
+                          {/* </button> to={`/menu/${menu.menuId}`}> */}
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-6 w-6 text-blue-700 dark:text-blue-700 hover:h-8 hover:w-8"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                            />
+                          </svg>
                         </button>
                       </div>
                       <div
@@ -123,6 +139,7 @@ export const Menus = () => {
           <div className="flex h-screen"></div>
         </div>
       </div>
+      <Toast ref={toast} />
     </div>
   );
 };

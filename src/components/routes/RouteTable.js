@@ -7,6 +7,7 @@ import { LoginOrRegister } from "../pages/LoginorRegister";
 import { Menus } from "../pages/Menus";
 import { MenuDetail } from "../pages/MenuDetail";
 import { Logout } from "../login/Logout";
+import { CartPage } from "../pages/CartPage";
 
 function RouteTable() {
   return (
@@ -71,6 +72,15 @@ function RouteTable() {
           <Layout>
             {" "}
             <Menus />{" "}
+          </Layout>
+        }
+      ></Route>
+      <Route
+        path="/cart"
+        element={
+          <Layout>
+            {" "}
+            <CartPage />
           </Layout>
         }
       ></Route>

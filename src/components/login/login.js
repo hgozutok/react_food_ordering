@@ -4,8 +4,6 @@ import { loginUser } from "../../services/LoginService";
 import { useDispatch } from "react-redux";
 import { token, setUserInfos } from "../redux/slices/UserSlices";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 export const LoginPage = () => {
   const {
@@ -20,15 +18,6 @@ export const LoginPage = () => {
   const onSubmit = (data, event) => {
     event.preventDefault();
     console.log(data);
-    // toast.info("Logging in...", {
-    //   position: "top-right",
-    //   autoClose: 3000,
-    //   hideProgressBar: false,
-    //   closeOnClick: true,
-    //   pauseOnHover: true,
-    //   draggable: true,
-    //   progress: undefined,
-    // });
 
     loginUser(data)
       .then((response) => {
@@ -37,13 +26,13 @@ export const LoginPage = () => {
           dispatch(token(response.data.token));
           dispatch(setUserInfos(response.data));
           localStorage.setItem("token", response.data.token);
-          toast.success("Login Successful");
+          //   toast.success("Login Successful");
           navigate("/", { replace: true });
           // console.log(existingToken);
         }
       })
       .catch((error) => {
-        toast.error("Login Failed");
+        //  toast.error("Login Failed");
       });
   };
 
@@ -93,7 +82,6 @@ export const LoginPage = () => {
           />
         </form>
       </div>
-      <ToastContainer />
     </div>
   );
 };
