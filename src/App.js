@@ -8,6 +8,9 @@ import RouteTable from "./components/routes/RouteTable";
 
 import { LoginModal } from "./components/login/LoginModal";
 
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+
 function App() {
   console.log(process.env);
   // console.log(process.env.secrets.JWT_KEY);

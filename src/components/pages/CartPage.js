@@ -2,8 +2,21 @@ import React from "react";
 import { useForm } from "react-hook-form";
 
 import { useDispatch, useSelector } from "react-redux";
+import { Toast } from "primereact/toast";
+
+import {
+  CardElement,
+  Elements,
+  useStripe,
+  useElements,
+  PaymentElement,
+} from "@stripe/react-stripe-js";
 
 export const CartPage = () => {
+  const stripe = useStripe();
+  const elements = useElements();
+
+  const toast = React.useRef(null);
   const {
     register,
     formState: { errors },
@@ -14,10 +27,53 @@ export const CartPage = () => {
   const cartItems = useSelector((state) => state.cart);
 
   const cartTotal = useSelector((state) => state.total);
-  const onSubmit = (data, event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
-    console.log(data);
-    // dispatch(cartItems(data));
+    console.log(elements);
+
+    if (!stripe || !elements) {
+      // Stripe.js has not yet loaded.
+      // Make sure to disable form submission until Stripe.js has loaded.
+      return;
+    }
+    const element = elements.getElement(CardElement);
+    console.log(element);
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: "card",
+      card: element,
+    });
+    if (error) {
+      console.log(error);
+    } else {
+      console.log(paymentMethod);
+      toast.current.show({
+        severity: "success",
+        summary: " payment intended added",
+        detail: "Your payment intended added",
+      });
+    }
+    var myElements = stripe.elements({
+      //clientSecret: "sk_test_u7nRb1Q7LLtLAtIHB9GQZ2TV00nhUCeEFQ",
+      clientSecret: paymentMethod.id,
+    });
+    const result = await stripe.confirmPayment({
+      elements,
+    });
+
+    if (result.error) {
+      console.log(result.error.message);
+      toast.current.show({
+        severity: "error",
+        summary: " error on payment intend",
+        detail: "Error occurred on payment intend",
+      });
+    } else {
+      toast.current.show({
+        severity: "success",
+        summary: " payment intended added",
+        detail: "Your payment intended added",
+      });
+    }
   };
 
   console.log(cartItems.total);
@@ -44,48 +100,23 @@ export const CartPage = () => {
         )}
       </div>
       <div>
-        <h1>credit Card informations</h1>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex flex-col ">
-            <label htmlFor="cardNumber">cardNumber</label>
-            <input
-              type="cardNumber"
-              {...register("cardNumber", { required: true, maxLength: 20 })}
-            />
-            <span className="text-red-600	">
-              {errors.cardNumber?.type === "required" &&
-                "cardNumber is required"}
-            </span>
-          </div>
-          <div className="flex flex-col ">
-            <label htmlFor="expirationDate">expirationDate</label>
-            <input
-              type="expirationDate"
-              {...register("expirationDate", { required: true, maxLength: 20 })}
-            />
-            <span className="text-red-600	">
-              {errors.expirationDate?.type === "required" &&
-                "expirationDate is required"}
-            </span>
-          </div>
+        <h1>Credit Card Informations</h1>
+        <div className="card ">
+          <form id="payment-form" onSubmit={onSubmit}>
+            <div id="card-element">
+              {/* <CardElement /> */}
+              <PaymentElement />
+            </div>
 
-          <div className="flex flex-col ">
-            <label htmlFor="cvv">cvv</label>
             <input
-              type="cvv"
-              {...register("cvv", { required: true, maxLength: 20 })}
+              className="bg-fuchsia-800 w-full rounded-lg text-white p-2"
+              type="submit"
+              value="PAY NOW"
             />
-            <span className="text-red-600	">
-              {errors.cvv?.type === "required" && "cvv is required"}
-            </span>
-          </div>
-          <input
-            className="bg-fuchsia-800 w-full rounded-lg text-white p-2"
-            type="submit"
-            value="PAY NOW"
-          />
-        </form>
+          </form>
+        </div>
       </div>
+      <Toast ref={toast} />
     </div>
   );
 };

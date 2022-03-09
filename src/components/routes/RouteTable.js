@@ -10,6 +10,9 @@ import { Logout } from "../login/Logout";
 import { CartPage } from "../pages/CartPage";
 
 function RouteTable() {
+  const options = {
+    clientSecret: "sk_test_u7nRb1Q7LLtLAtIHB9GQZ2TV00nhUCeEFQ",
+  };
   return (
     <Routes>
       <Route
